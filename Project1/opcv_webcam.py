@@ -14,7 +14,8 @@ while True:
     cv2.imshow("Canny", imgCanny)
     cv2.imshow("Dilate", imgDilation)
 
-    if cv2.waitKey(20) & 0xff == ord("q"):
+    key = cv2.waitKey(20) & 0xff
+    if key == ord("q") or key == 27:
         break
 
 cam.release()

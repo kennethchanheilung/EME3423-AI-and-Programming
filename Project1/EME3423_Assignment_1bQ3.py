@@ -1,0 +1,26 @@
+import cv2
+import numpy as np
+
+cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+
+while True:
+    _, img = cam.read()
+    img = cv2.resize(img, (int(img.shape[1] / 2), int(img.shape[0] / 2)))
+
+    img1 = img
+    img2 = cv2.flip(img,1)
+    img3 = cv2.flip(img, 0)
+    img4 = cv2.flip(img, -1)
+
+    Hori = np.concatenate((img1,img2),axis=1)
+    Hori2 = np.concatenate((img3,img4),axis=1)
+    Verti = np.concatenate((Hori,Hori2),axis=0)
+
+    cv2.imshow("frame", Verti)
+
+    key = cv2.waitKey(20) & 0xff
+    if key == ord("q") or key == 27:
+        break
+
+cam.release()
+cv2.destroyAllWindows()
